@@ -6,19 +6,22 @@ test('Deve consultar um pedido aprovado', async ({ page }) => {
     //CHECKPOINT
   await expect(page.getByTestId('hero-section').getByRole('heading')).toContainText('Velô Sprint');
 
-  await page.getByRole('link', { name: 'Consultar Pedido' }).click();
+  // Checkpoint
+await expect(
+  page.getByTestId('hero-section').getByRole('heading')).toContainText('Velô Sprint');
 
-  //CHECKPOINT
-  await expect(page.getByRole('heading')).toContainText('Consultar Pedido');
+await page.getByRole('link', { name: 'Consultar Pedido' }).click();
 
-    //CHECKPOINT
-  await page.getByTestId('search-order-id').fill('VLO-YHVL7P');
+// Checkpoint
+await expect(page.getByRole('heading')).toContainText('Consultar Pedido');
 
-  await page.getByTestId('search-order-button').click();
+await page.getByTestId('search-order-id').fill('VLO-7F0C91');
 
-    //CHECKPOINT
-  await expect(page.getByTestId('order-result-id')).toContainText('VLO-YHVL7P');
+await page.getByTestId('search-order-button').click();
 
-    //CHECKPOINT
-  await expect(page.getByTestId('order-result-status')).toContainText('APROVADO');
+await expect(page.getByTestId('order-result-id')).toBeVisible();
+await expect(page.getByTestId('order-result-id')).toContainText('VLO-7F0C91');
+
+await expect(page.getByTestId('order-result-status')).toBeVisible();
+await expect(page.getByTestId('order-result-status')).toContainText('APROVADO');
 });
